@@ -1,8 +1,4 @@
--- Create the database
-CREATE DATABASE IF NOT EXISTS bitcoin_broker;
 
--- Use the database
-USE bitcoin_broker;
 
 -- Drop existing tables if they exist (use with caution in production)
 DROP TABLE IF EXISTS notifications;
