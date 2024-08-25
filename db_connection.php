@@ -1,8 +1,8 @@
 <?php
-$servername = "localhost";
-$db_username = "your_db_username";
-$db_password = "your_db_password";
-$dbname = "bitcoin_broker";
+$servername = "sql200.infinityfree.com";
+$db_username = "if0_37174167";
+$db_password = "09058176690Ol";
+$dbname = "if0_37174167_bitcoin";
 
 // Create connection
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
