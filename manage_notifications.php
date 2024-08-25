@@ -7,20 +7,19 @@ if (!isset($_SESSION['admin_logged_in'])) {
     exit();
 }
 
-// Fetch all investments from the database
-$query = "SELECT * FROM investments";
+// Fetch all notifications from the database
+$query = "SELECT * FROM notifications";
 $result = mysqli_query($conn, $query);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $investment_id = $_POST['investment_id'];
-    $new_status = $_POST['status'];
+    $notification_id = $_POST['notification_id'];
 
-    // Update the investment status
-    $update_query = "UPDATE investments SET status='$new_status' WHERE investment_id='$investment_id'";
-    if (mysqli_query($conn, $update_query)) {
-        $success = "Investment status updated successfully!";
+    // Delete the notification
+    $delete_query = "DELETE FROM notifications WHERE notification_id='$notification_id'";
+    if (mysqli_query($conn, $delete_query)) {
+        $success = "Notification deleted successfully!";
     } else {
-        $error = "Error updating status: " . mysqli_error($conn);
+        $error = "Error deleting notification: " . mysqli_error($conn);
     }
 }
 ?>
@@ -30,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Investments</title>
+    <title>Manage Notifications</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center mt-5">Manage Investments</h2>
+        <h2 class="text-center mt-5">Manage Notifications</h2>
         <?php if (isset($success)) { ?>
             <div class="alert alert-success text-center">
                 <?php echo $success; ?>
@@ -49,31 +48,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <table class="table table-bordered mt-4">
             <thead>
                 <tr>
-                    <th>Investment ID</th>
+                    <th>Notification ID</th>
                     <th>User ID</th>
-                    <th>Amount</th>
-                    <th>Date</th>
-                    <th>Status</th>
+                    <th>Message</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <?php while ($row = mysqli_fetch_assoc($result)) { ?>
                 <tr>
-                    <td><?php echo $row['investment_id']; ?></td>
+                    <td><?php echo $row['notification_id']; ?></td>
                     <td><?php echo $row['user_id']; ?></td>
-                    <td>$<?php echo $row['amount']; ?></td>
-                    <td><?php echo $row['date']; ?></td>
-                    <td><?php echo $row['status']; ?></td>
+                    <td><?php echo $row['message']; ?></td>
                     <td>
                         <form method="post">
-                            <input type="hidden" name="investment_id" value="<?php echo $row['investment_id']; ?>">
-                            <select name="status" class="form-control">
-                                <option value="Pending" <?php if ($row['status'] == 'Pending') echo 'selected'; ?>>Pending</option>
-                                <option value="Completed" <?php if ($row['status'] == 'Completed') echo 'selected'; ?>>Completed</option>
-                                <option value="Canceled" <?php if ($row['status'] == 'Canceled') echo 'selected'; ?>>Canceled</option>
-                            </select>
-                            <button type="submit" class="btn btn-primary btn-block mt-2">Update</button>
+                            <input type="hidden" name="notification_id" value="<?php echo $row['notification_id']; ?>">
+                            <button type="submit" class="btn btn-danger btn-block">Delete</button>
                         </form>
                     </td>
                 </tr>
