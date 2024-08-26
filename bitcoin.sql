@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS notifications (
     type ENUM('info', 'success', 'warning', 'error') NOT NULL,
     recipient ENUM('admin', 'user') NOT NULL,
     recipient_username VARCHAR(50) NOT NULL,
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Insert example users
