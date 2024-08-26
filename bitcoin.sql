@@ -14,13 +14,13 @@ CREATE TABLE IF NOT EXISTS admins (
 );
 -- Create the transactions table
 CREATE TABLE transactions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     type ENUM('deposit', 'withdrawal', 'investment') NOT NULL,
     amount DECIMAL(15, 2) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     status ENUM('pending', 'completed', 'failed') DEFAULT 'completed',
     FOREIGN KEY (user_id) REFERENCES users(user_id)
+    );
 
 -- Insert example data for testing
 INSERT INTO transactions (user_id, type, amount, status) VALUES 
