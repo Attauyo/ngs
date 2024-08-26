@@ -19,8 +19,7 @@ CREATE TABLE transactions (
     amount DECIMAL(15, 2) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     status ENUM('pending', 'completed', 'failed') DEFAULT 'completed',
-    FOREIGN KEY (user_id) REFERENCES users(username)
-);
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
 
 -- Insert example data for testing
 INSERT INTO transactions (user_id, type, amount, status)
