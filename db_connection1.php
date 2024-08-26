@@ -1,8 +1,8 @@
 <?php
-$servername = "fdb28.awardspace.net"; // Your database server address
-$username = "4521183_bitcoin";        // Your MySQL username
-$password = "your_password";          // Your MySQL password
-$dbname = "4521183_bitcoin";          // Your database name
+$servername = "sql103.infinityfree.com"; // Your database server address
+$username = "if0_37180302";        // Your MySQL username
+$password = "09058176690ol";          // Your MySQL password
+$dbname = "if0_37180302_bit";          // Your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
