@@ -1,14 +1,7 @@
-
-
--- Drop existing tables if they exist (use with caution in production)
-DROP TABLE IF EXISTS notifications;
-DROP TABLE IF EXISTS investments;
-DROP TABLE IF EXISTS admins;
-DROP TABLE IF EXISTS users;
-
 -- Users table
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     balance DECIMAL(15, 2) DEFAULT 0.00
@@ -20,15 +13,24 @@ CREATE TABLE IF NOT EXISTS admins (
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL
 );
-
--- Investments table
-CREATE TABLE IF NOT EXISTS investments (
-    investment_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
+-- Create the transactions table
+CREATE TABLE transactions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    type ENUM('deposit', 'withdrawal', 'investment') NOT NULL,
     amount DECIMAL(15, 2) NOT NULL,
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('pending', 'completed', 'failed') DEFAULT 'completed',
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+-- Insert example data for testing
+INSERT INTO transactions (user_id, type, amount, status)
+VALUES 
+(1, 'deposit', 100.00, 'completed'),
+(2, 'investment', 50.00, 'completed'),
+(3, 'withdrawal', 20.00, 'pending');
+
 
 -- Notifications table
 CREATE TABLE IF NOT EXISTS notifications (
@@ -43,21 +45,15 @@ CREATE TABLE IF NOT EXISTS notifications (
 
 -- Insert example users
 INSERT INTO users (username, password, balance) VALUES
-('user1', 'password123', 1000.00),
-('user2', 'password456', 2000.00);
+(1,'charity', 'charity', 1000.00),
+(2,'user2', 'password456', 2000.00);
 
 -- Insert example admins
 INSERT INTO admins (username, password) VALUES
-('admin1', 'adminpass123'),
-('admin2', 'adminpass456');
-
--- Insert example investments
-INSERT INTO investments (username, amount, date) VALUES
-('user1', 100.00, NOW()),
-('user2', 200.00, NOW());
+(1, 'admin', 'admin'),
 
 -- Insert example notifications
 INSERT INTO notifications (message, type, recipient, recipient_username, date) VALUES
-('Investment successful!', 'success', 'user', 'user1', NOW()),
-('Your balance is low.', 'warning', 'user', 'user2', NOW()),
-('Admin login attempt.', 'info', 'admin', 'admin1', NOW());
+(1, 'Investment successful!', 'success', 'user', 'user1', NOW()),
+(2, 'Your balance is low.', 'warning', 'user', 'user2', NOW()),
+(3, 'Admin login attempt.', 'info', 'admin', 'admin1', NOW());
