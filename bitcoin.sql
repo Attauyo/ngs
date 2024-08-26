@@ -23,8 +23,7 @@ CREATE TABLE transactions (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 
 -- Insert example data for testing
-INSERT INTO transactions (user_id, type, amount, status)
-VALUES 
+INSERT INTO transactions (user_id, type, amount, status) VALUES 
 (1, 'deposit', 100.00, 'completed'),
 (2, 'investment', 50.00, 'completed'),
 (3, 'withdrawal', 20.00, 'pending');
