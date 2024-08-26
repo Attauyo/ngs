@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS notifications (
     recipient ENUM('admin', 'user') NOT NULL,
     recipient_username VARCHAR(50) NOT NULL,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (recipient_username) REFERENCES users(username)
 );
 
 -- Insert example users
