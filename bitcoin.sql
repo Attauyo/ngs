@@ -19,7 +19,6 @@ CREATE TABLE transactions (
     amount DECIMAL(15, 2) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     status ENUM('pending', 'completed', 'failed') DEFAULT 'completed',
-    FOREIGN KEY (user_id) REFERENCES users(username)
     );
 
 -- Insert example data for testing
