@@ -18,7 +18,7 @@ CREATE TABLE transactions (
     type ENUM('deposit', 'withdrawal', 'investment') NOT NULL,
     amount DECIMAL(15, 2) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status ENUM('pending', 'completed', 'failed') DEFAULT 'completed',
+    status ENUM('pending', 'completed', 'failed') DEFAULT 'completed'
     );
 
 -- Insert example data for testing
