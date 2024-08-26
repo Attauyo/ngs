@@ -19,14 +19,7 @@ CREATE TABLE transactions (
     amount DECIMAL(15, 2) NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     status ENUM('pending', 'completed', 'failed') DEFAULT 'completed'
-    );
-
--- Insert example data for testing
-INSERT INTO transactions (user_id, type, amount, status) VALUES 
-(1, 'deposit', 100.00, 'completed'),
-(2, 'investment', 50.00, 'completed'),
-(3, 'withdrawal', 20.00, 'pending');
-
+);
 
 -- Notifications table
 CREATE TABLE IF NOT EXISTS notifications (
@@ -46,10 +39,17 @@ INSERT INTO users (user_id, username, password, balance) VALUES
 
 -- Insert example admins
 INSERT INTO admins (admin_id, username, password) VALUES
-(1, 'admin', 'admin'),
+(1, 'admin', 'admin');
 
 -- Insert example notifications
 INSERT INTO notifications (notification_id, message, type, recipient, recipient_username, date) VALUES
 (1, 'Investment successful!', 'success', 'user', 'user1', NOW()),
 (2, 'Your balance is low.', 'warning', 'user', 'user2', NOW()),
 (3, 'Admin login attempt.', 'info', 'admin', 'admin1', NOW());
+
+
+-- Insert example data for testing
+INSERT INTO transactions (user_id, type, amount, status) VALUES 
+(1, 'deposit', 100.00, 'completed'),
+(2, 'investment', 50.00, 'completed'),
+(3, 'withdrawal', 20.00, 'pending');
