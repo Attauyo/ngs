@@ -23,7 +23,7 @@ CREATE TABLE transactions (
 
 -- Notifications table
 CREATE TABLE IF NOT EXISTS notifications (
-    notification_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     message TEXT NOT NULL,
     type ENUM('info', 'success', 'warning', 'error') NOT NULL,
     recipient ENUM('admin', 'user') NOT NULL,
